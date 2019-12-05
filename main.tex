@@ -108,7 +108,9 @@ Design a constant boundary truncated sequential test that combines the SPRT with
 \begin{frame}
 \frametitle{The Truncated SPRT}
 
-Formally, let $T = \inf\set{n \geq 1 : Z_{T}(\theta_1, \theta_0) \notin (-\log(A), \log(B)) }$. The decision rule is
+Formally, let $T_{SPRT} = \inf\set{n \geq 1 : Z_{T}(\theta_1, \theta_0) \notin (-\log(A), \log(B)) }$.
+
+Set $T = T_{SPRT} \wedge M$. The decision rule is
 \[
 D =
 \begin{cases}
