@@ -1,0 +1,89 @@
+\usepackage{amsthm,amsmath,amssymb,bbm,bm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{appendixnumberbeamer}
+\newcommand<>{\uncovergraphics}[2][{}]{
+    % Taken from: <https://tex.stackexchange.com/a/354033/95423>
+    \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0] (B) at (4,0)
+            {\includegraphics[#1]{#2}};
+        \alt#3{}{%
+            \fill [draw=none, fill=white, fill opacity=1.0] (B.north west) -- (B.north east) -- (B.south east) -- (B.south west) -- (B.north west) -- cycle;
+        }
+    \end{tikzpicture}
+}
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{#1}
+\DeclareMathOperator*{\bigoh}{\mathcal{O}}
+\DeclareMathOperator*{\spn}{span}
+\DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{#1}
+
+\def\mOne{{\mathbbm{1}}}
+\newcommand{\ind}[1]{\mOne\{#1\}}
+
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\mbx}{\mathbf{x}}
+\newcommand{\mbz}{\mathbf{z}}
+\newcommand{\Reals}[1]{\mathbb{R}^{#1}}
+\newcommand{\condit}{\, | \,}
+
+\newcommand{\Syx}{\mathcal{S}_{Y \condit \X}}
+
+\newcommand{\semitransp}[2][35]{\color{fg!#1}#2}
+
+\newcommand{\LeftChild}{C_{L}}
+\newcommand{\RightChild}{C_{R}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+% probability
+\DeclarePairedDelimiterX{\expectarg}[1]{[}{]}{%
+    \,
+    \ifnum\currentgrouptype=16 \else\begingroup\fi
+    \activatebar#1
+    \ifnum\currentgrouptype=16 \else\endgroup\fi
+    \,
+}
+\DeclarePairedDelimiterX{\variancearg}[1]{(}{)}{%
+    \,
+    \ifnum\currentgrouptype=16 \else\begingroup\fi
+    \activatebar#1
+    \ifnum\currentgrouptype=16 \else\endgroup\fi
+    \,
+}
+\newcommand{\E}{\mathbb{E} \, \expectarg}
+\newcommand{\Ehat}{\widehat{\mathbb{E}} \, \expectarg}
+\newcommand{\En}{E_n \, \expectarg}
+\newcommand{\cond}{\, | \,}
+
+\newcommand{\EP}{\mathbb{E}_P \, \expectarg}
+\newcommand{\Var}{\operatorname{Var}\variancearg}
+\newcommand{\Varhat}{\operatorname{\hat{Var}}\variancearg}
+\newcommand{\Cov}{\operatorname{Cov}\variancearg}
+\newcommand{\CovP}{\operatorname{Cov_P}\variancearg}
+\newcommand{\Corr}{\operatorname{Corr}\variancearg}
+\newcommand{\innermid}{\nonscript\;\delimsize\vert\nonscript\;}
+\newcommand{\activatebar}{%
+    \begingroup\lccode`\~=`\|
+    \lowercase{\endgroup\let~}\innermid
+    \mathcode`|=\string"8000
+}
+\DeclareMathOperator*{\logit}{logit}
+\newcommand{\iid}{\text{iid}}
+
+\newcommand*{\figuretitle}[1]{%
+    {
+     \textbf{#1}
+    \par\medskip}
+}

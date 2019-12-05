@@ -1,0 +1,70 @@
+\documentclass[10pt]{beamer}
+\usepackage{fontspec}
+\usepackage{caption}
+\usetheme{metropolis}
+\definecolor{uiucblue}{HTML}{13294B}
+\definecolor{steelblue}{HTML}{4682b4}
+\definecolor{skyblue}{HTML}{00bfff}
+\definecolor{bananayellow}{HTML}{ffe135}
+\definecolor{bluishgreen}{cmyk}{97,0,75,0}
+\definecolor{darkpurple}{HTML}{9F4C93}
+\definecolor{offwhite}{HTML}{F5F5F5}
+\definecolor{bestcolor}{cmyk}{97,0,75,0}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{frametitle}{bg=offwhite, fg=black}
+\setbeamercolor{block body}{bg=offwhite}
+\setbeamercolor{block title}{bg=mDarkTeal!10}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\setlength{\columnsep}{3em}
+\def\columnseprulecolor{\color{black}}
+\input{preamble}
+\newcommand{\cmark}{\textcolor{orange}{\ding{51}}}
+\newcommand{\xmark}{\textcolor{gray}{\ding{55}}}%
+
+\title{The Truncated SPRT}
+
+\author{Anamitra Chaudhuri and Joshua Loyal}
+\institute{STAT 578: Sequential Design \\ \\
+           Paper: \\
+           \textit{Asymptotic Efficiences of Truncated Sequential Tests} \\
+           by Sawasd Tantaratana and Harold Vincent Poor}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[noframenumbering, plain]
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The Truncated SPRT}
+
+%\begin{block}{Question}
+%How do we choose $M, \tau, A, B$ to control the error probabilities?
+%\end{block}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/truncated_sprt}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Design of the Truncated SPRT}
+
+\begin{block}{Question}
+How do we choose the SPRT paramters $A, B$ and the FSS parameters $M, \tau$ such that
+\[
+P_{\theta_0}(D = 1) \leq \alpha \quad \text{and} \quad P_{\theta_1}(D = 0) \leq \beta
+\]
+\end{block}
+
+\end{frame}
+
+\end{document}
