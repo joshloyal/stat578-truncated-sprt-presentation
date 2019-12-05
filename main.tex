@@ -121,10 +121,11 @@ D =
 
 \begin{figure}
 \centering
-\includegraphics[height=0.5\textheight, width=0.8\textwidth]{images/truncated_sprt}
+\includegraphics[height=0.45\textheight, width=0.8\textwidth]{images/truncated_sprt}
 \end{figure}
-\end{frame}
 
+\textit{Remark:} $E_{\theta}(T\,) \leq \min(E_{\theta}(T_{SPRT}), M)$
+\end{frame}
 
 \begin{frame}
 \frametitle{The Truncated SPRT}
@@ -148,7 +149,7 @@ P_{\theta_0}(D = 1) &\leq \alpha_{SPRT} + \alpha_{FSS} \\
 P_{\theta_1}(D = 0) &\leq \beta_{SPRT} + \beta_{FSS}
 \end{split}
 \]
-Here the error probabilities correspond to the untruncated SPRT and FSS test with parameters $A, B, M, \tau$.
+Here the error probabilities correspond to the non-truncated SPRT and FSS test with parameters $A, B, M, \tau$.
 \end{block}
 
 \textit{Proof:}
@@ -161,6 +162,50 @@ P_{\theta_0}(D = 1) &= P_{\theta_0}(T < M, Z_T \geq \log(B)) + P_{\theta_0}(T = 
 \]
 
 Similarly, $\beta \leq \beta_{SPRT} + \beta_{FSS}$.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Design of the Truncated SPRT}
+
+This means we can design a Truncated SPRT like a mixture of an SPRT with a FSS test.
+
+Choose mixing weights $c_1, c_2 \in [0, 1]$ and control the errors with
+\[
+\begin{split}
+\alpha_{FSS} = c_1 \alpha, \quad &\beta_{FSS} = c_2 \beta \\
+\alpha_{SPRT} = (1 - c_1) \alpha, \quad &\beta_{SPRT} = (1 - c_2) \beta.
+\end{split}
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Design of the Truncated SPRT}
+
+Use Wald's recommendations to set the thresholds of the SPRT:
+\[
+\begin{split}
+A &= \frac{1 - \alpha_{SPRT}}{\beta_{SPRT}} \\
+B &= \frac{1 - \beta_{SPRT}}{\alpha_{SPRT}}. \\
+\end{split}
+\]
+
+Use the large sample normal approximation to the FSS power function to set the FSS parameters:
+\[
+\begin{split}
+M &= \frac{\sigma_{\theta_0}^2 \sigma_{\theta_1}^2}{(\mu_{\theta_1} - \mu_{\theta_0})^2} \left(\frac{1}{\sigma_{\theta_0}} z_{\beta_{FSS}} + \frac{1}{\sigma_{\theta_1}}z_{\alpha_{FSS}}\right)^2 \\
+\tau &= \frac{\sqrt{M}}{\mu_{\theta_1} - \mu_{\theta_0}} \left(\mu_{\theta_1} \sigma_{\theta_0} z_{\alpha_{FSS}} + \mu_{\theta_0} \sigma_{\theta_1} z_{\beta_{FSS}}\right)
+\end{split}
+\]
+where $\mu_{\theta} = E_{\theta}\left[Z_1(\theta_1, \theta_0)\right]$ and $\sigma^2_{\theta} = \text{Var}_{\theta}\left[Z_1(\theta_1, \theta_0)\right]$.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Gaussian Distribution}
+
+Let $X_1, X_2, \dots  \iidsim N(\theta, 1)$. We are interested in testing $H_0: \theta \leq -\delta$ vs. $H_1: \theta \geq \delta$.
 
 \end{frame}
 
