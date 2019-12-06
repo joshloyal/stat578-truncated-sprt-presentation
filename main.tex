@@ -45,7 +45,7 @@ Given $\theta_1 > \theta_0$, we want to design a sequential test $(T, D)$ for
 \[
 H_0: \theta \leq \theta_0 \quad \text{vs.} \quad H_1: \theta \geq \theta_1
 \]
-such that the error probabilities are controlled at levels $\alpha, \beta$:
+such that the error probabilities are controlled at levels $\alpha$ and $\beta$:
 \[
 P_{\theta_0}(D = 1) \leq \alpha \quad \text{ and } \quad P_{\theta_1}(D = 0) \leq \beta.
 \]
@@ -54,13 +54,13 @@ P_{\theta_0}(D = 1) \leq \alpha \quad \text{ and } \quad P_{\theta_1}(D = 0) \le
 \begin{frame}
 \frametitle{Problem Setup}
 
-Often times we employ a sequenial test to collect less samples than the equivalent fixed sample size (FSS) test:
+Often times we employ a sequential test to collect less samples than the equivalent fixed sample size (FSS) test:
 
 \[
 D_{FSS} = \ind{Z_M(\theta_1, \theta_0) \geq \tau}
 \]
 
-where $M$ and $\tau$ are chosen to achieve the specified error probabilities ($\alpha, \beta$).
+where $M$ and $\tau$ are chosen to achieve the specified error probabilities $\alpha$ and $\beta$.
 
 \end{frame}
 
@@ -74,7 +74,7 @@ The SPRT has a smaller $E_{\theta}(T\,)$ than the FSS for $\theta \notin (\theta
 \includegraphics[width=0.7\textwidth]{images/sprt_ess.pdf}
 \end{figure}
 
-This is the case for small error probabilities common in many applications!
+This is the case for the small error probabilities common in practice!
 \end{frame}
 
 \begin{frame}
@@ -90,8 +90,6 @@ Design a constant boundary truncated sequential test that combines the SPRT with
 \item The derivation of the (non-constant) boundaries can be difficult to derive in general.
 \item The maximum sample size is often very large.
 \end{itemize}
-
-%As long as we know how to acheive the desired error control, a test that combines and SPRT with a constant FSS boundary is easy to implement.
 
 \end{frame}
 
@@ -134,7 +132,7 @@ D =
 \begin{itemize}
 \item How do we choose $A, B, M, \tau$ to achieve the desired error control?
 \item Does the ESS of the truncated SPRT fall below the equivalent FSS test ($M_{FSS}$) in the worst case scenario (at $\theta_{*}$)?
-\item How does this test compare with other bounded tests: Lorden's 2-SPRT and the GLR?
+\item How does this test compare with other bounded tests, e.g. Lorden's 2-SPRT, GLR?
 \end{itemize}
 
 \end{frame}
@@ -259,7 +257,13 @@ A good trade-off is $c \in (0.3, 0.6)$
 
 \begin{frame}
 \frametitle{Comparison with other Sequential Tests}
+For the Gaussian example we compared the Truncated SPRT with the SPRT, Lorden's 2-SPRT, and the GLR test.
 
+We set $\delta = 1$, $c_1 = c_2 = 0.5$, and $\alpha = \beta = 10^{-1}, 10^{-2}, 10^{-3}, 10^{-4}$.
+
+The thresholds of each test we chosen via simulation (1,000 iterations) so that the error probabilities are exactly $\alpha$. For the Truncated SPRT this meant tuning the corresponding SPRT thresholds (The FSS threshold is exact).
+
+Each ESS estimate was obtained with 5,000 Monte Carlo samples.
 \end{frame}
 
 \begin{frame}
