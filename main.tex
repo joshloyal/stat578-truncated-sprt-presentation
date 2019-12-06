@@ -84,11 +84,11 @@ This is the case for small error probabilities common in many applications!
 Design a constant boundary truncated sequential test that combines the SPRT with a final FSS test.
 \end{block}
 
-\textit{Remark:} We have seen tests with truncated boundaries before, e.g. Lorden's 2-SPRT, GLR, Mixture, etc.
+\textit{Remark:} We have seen bounded tests before, e.g. Lorden's 2-SPRT, GLR, Mixture, etc.
 \begin{itemize}
-\item Achieve truncation through non-constant (intersecting) boundaries.
+\item Achieve bounded stopping times through non-constant (intersecting) boundaries.
 \item The derivation of the (non-constant) boundaries can be difficult to derive in general.
-\item The truncation point is often very large.
+\item The maximum sample size is often very large.
 \end{itemize}
 
 %As long as we know how to acheive the desired error control, a test that combines and SPRT with a constant FSS boundary is easy to implement.
@@ -132,9 +132,9 @@ D =
 \textbf{Outstanding Questions}
 
 \begin{itemize}
-\item How do we choose $A, B, M, \tau$ to acheive the desired error control?
-\item Does the ESS of the truncated SPRT fall below the equivalent $M_{FSS}$ once we acheive the desired error control?
-\item How does this test compare with other truncated tests: Lorden's 2-SPRT and the GLR?
+\item How do we choose $A, B, M, \tau$ to achieve the desired error control?
+\item Does the ESS of the truncated SPRT fall below the equivalent FSS test ($M_{FSS}$) in the worst case scenario (at $\theta_{*}$)?
+\item How does this test compare with other bounded tests: Lorden's 2-SPRT and the GLR?
 \end{itemize}
 
 \end{frame}
@@ -152,6 +152,7 @@ P_{\theta_1}(D = 0) &\leq \beta_{SPRT} + \beta_{FSS}
 Here the error probabilities correspond to the non-truncated SPRT and FSS test with parameters $A, B, M, \tau$.
 \end{block}
 
+\uncover<2->{
 \textit{Proof:}
 \[
 \begin{split}
@@ -162,6 +163,7 @@ P_{\theta_0}(D = 1) &= P_{\theta_0}(T < M, Z_T \geq \log(B)) + P_{\theta_0}(T = 
 \]
 
 Similarly, $\beta \leq \beta_{SPRT} + \beta_{FSS}$.
+}
 
 \end{frame}
 
@@ -170,11 +172,11 @@ Similarly, $\beta \leq \beta_{SPRT} + \beta_{FSS}$.
 
 This means we can design a Truncated SPRT like a mixture of an SPRT with a FSS test.
 
-Choose mixing weights $c_1, c_2 \in [0, 1]$ and control the errors with
+Satisfy error constraints by choosing mixing weights $c_1, c_2 \in [0, 1]$ such that
 \[
 \begin{split}
-\alpha_{FSS} = c_1 \alpha, \quad &\beta_{FSS} = c_2 \beta \\
-\alpha_{SPRT} = (1 - c_1) \alpha, \quad &\beta_{SPRT} = (1 - c_2) \beta.
+\alpha_{FSS} = c_1 \alpha, \quad &\alpha_{SPRT} = (1 - c_1) \alpha \\
+\beta_{FSS} = c_2 \beta, \quad &\beta_{SPRT} = (1 - c_2) \beta.
 \end{split}
 \]
 
@@ -219,8 +221,28 @@ when $\alpha = \beta$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Choosing $c_1$ and $c_2$ -- Gaussian Distribution}
-A good trade-off is $c \in (0.3, 0.6)$.
+\frametitle{How to choose $c_1$ and $c_2$}
+
+One way to choose $c_1$ and $c_2$ is so that the following quantities are close to one:
+\[
+\frac{E_{\theta_{*}}[T\,]}{M_{FSS}} \quad \text{ and } \quad \frac{E_{\theta_0}[T\,]}{E_{\theta_0}[T_{SPRT}]}, \frac{E_{\theta_1}[T\,]}{E_{\theta_1}[T_{SPRT}]}
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{How to choose $c_1$ and $c_2$}
+\textit{Gaussian Example}: $X_1, X_2, \dots  \iidsim N(\theta, 1)$ and testing $H_0: \theta \leq -\delta$ vs. $H_1: \theta \geq \delta$.
+
+Assume we choose $\alpha = \beta$ and we consider the $-\delta$ and $\delta$ hypothesis as equally important. Then it makes sense to choose $c_1 = c_2 = c$.
+
+To investigate the effect of $c$ on $E_{\theta_{*}}[T\,] / M_{FSS}$ and $E_{\theta_1}[T\,] / E_{\theta_1}[T_{SPRT}]$, we performed Monte Carlo simulations with 1,000 iterations.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{How to choose $c_1$ and $c_2$}
+A good trade-off is $c \in (0.3, 0.6)$
 
 \begin{figure}
 \centering
@@ -234,5 +256,42 @@ A good trade-off is $c \in (0.3, 0.6)$.
 \end{figure}
 
 \end{frame}
+
+\begin{frame}
+\frametitle{Comparison with other Sequential Tests}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparison with other Sequential Tests}
+
+\begin{figure}
+\centering
+\begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{images/ess_alpha1e1}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{images/ess_alpha1e2}
+\end{subfigure}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparison with other Sequential Tests}
+
+\begin{figure}
+\centering
+\begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{images/ess_alpha1e3}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{images/ess_alpha1e4}
+\end{subfigure}
+\end{figure}
+\end{frame}
+
 
 \end{document}
