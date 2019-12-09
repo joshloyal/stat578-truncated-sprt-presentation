@@ -81,7 +81,7 @@ This is the case for the small error probabilities common in practice!
 \frametitle{Problem Setup}
 
 \begin{block}{Goal}
-Design a constant boundary truncated sequential test that combines the SPRT with a final FSS test.
+Design a constant boundary truncated sequential test that combines the SPRT with a final FSS test, which retains the advantages of untruncated SPRT but removes its disadvantages.
 \end{block}
 
 \textit{Remark:} We have seen bounded tests before, e.g. Lorden's 2-SPRT, GLR, Mixture, etc.
@@ -194,7 +194,7 @@ B &= \frac{1 - \beta_{SPRT}}{\alpha_{SPRT}}. \\
 Use the large sample normal approximation to the FSS power function to set the FSS parameters:
 \[
 \begin{split}
-M &= \frac{\sigma_{\theta_0}^2 \sigma_{\theta_1}^2}{(\mu_{\theta_1} - \mu_{\theta_0})^2} \left(\frac{1}{\sigma_{\theta_0}} z_{\beta_{FSS}} + \frac{1}{\sigma_{\theta_1}}z_{\alpha_{FSS}}\right)^2 \\
+M &= \frac{1}{(\mu_{\theta_1} - \mu_{\theta_0})^2} \left(\sigma_{\theta_1} z_{\beta_{FSS}} + \sigma_{\theta_0} z_{\alpha_{FSS}}\right)^2 \\
 \tau &= \frac{\sqrt{M}}{\mu_{\theta_1} - \mu_{\theta_0}} \left(\mu_{\theta_1} \sigma_{\theta_0} z_{\alpha_{FSS}} + \mu_{\theta_0} \sigma_{\theta_1} z_{\beta_{FSS}}\right)
 \end{split}
 \]
@@ -214,16 +214,32 @@ M &= \frac{(z_{\alpha_{FSS}} + z_{\beta_{FSS}})^2}{4 \delta^2} = \left(\frac{z_{
 \tau &= \sqrt{M} \delta (z_{\alpha_{FSS}} - z_{\beta_{FSS}}) = 0
 \end{split}
 \]
-when $\alpha = \beta$.
+when $\alpha = \beta$ and $c_1 = c_2$.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{A Trade-off}
+
+There is a trade-off between the truncation point $M$ and the expected sample size of the truncated test.
+
+A lower truncation point allows more error to the FSS test but less error to the SPRT which makes the overall expected sample size higher.
+
+\begin{figure}
+\centering
+\includegraphics[height=0.6\textheight, width=0.6\textwidth]{trade-off.pdf}
+\end{figure}
 
 \end{frame}
 
 \begin{frame}
 \frametitle{How to choose $c_1$ and $c_2$}
 
+$c_1$ and $c_2$ can be suitably tuned so that it retains the advantages of saving samples, ESS is uniformly smaller than the sample size of the FSS test.
+
 One way to choose $c_1$ and $c_2$ is so that the following quantities are close to one:
 \[
-\frac{E_{\theta_{*}}[T\,]}{M_{FSS}} \quad \text{ and } \quad \frac{E_{\theta_0}[T\,]}{E_{\theta_0}[T_{SPRT}]}, \frac{E_{\theta_1}[T\,]}{E_{\theta_1}[T_{SPRT}]}
+\frac{E_{\theta_{*}}[T\,]}{M_{FSS}}, \, \frac{M}{M_{FSS}}  \, \text{ and } \, \frac{E_{\theta_0}[T\,]}{E_{\theta_0}[T_{SPRT}]}, \frac{E_{\theta_1}[T\,]}{E_{\theta_1}[T_{SPRT}]}.
 \]
 
 \end{frame}
@@ -232,9 +248,9 @@ One way to choose $c_1$ and $c_2$ is so that the following quantities are close 
 \frametitle{How to choose $c_1$ and $c_2$}
 \textit{Gaussian Example}: $X_1, X_2, \dots  \iidsim N(\theta, 1)$ and testing $H_0: \theta \leq -\delta$ vs. $H_1: \theta \geq \delta$.
 
-Assume we choose $\alpha = \beta$ and we consider the $-\delta$ and $\delta$ hypothesis as equally important. Then it makes sense to choose $c_1 = c_2 = c$.
+Assume we choose $\delta =1$, $\alpha = \beta$ and we consider the $-\delta$ and $\delta$ hypothesis as equally important. Then it makes sense to choose $c_1 = c_2 = c$.
 
-To investigate the effect of $c$ on $E_{\theta_{*}}[T\,] / M_{FSS}$ and $E_{\theta_1}[T\,] / E_{\theta_1}[T_{SPRT}]$, we performed Monte Carlo simulations with 1,000 iterations.
+To investigate the effect of $c$ on $E_{\theta_{*}}[T\,] / M_{FSS}$, $M / M_{FSS}$, and $E_{\theta_1}[T\,] / E_{\theta_1}[T_{SPRT}]$, we performed Monte Carlo simulations with 2,000 iterations.
 
 \end{frame}
 
@@ -244,13 +260,19 @@ A good trade-off is $c \in (0.3, 0.6)$
 
 \begin{figure}
 \centering
-\begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth]{images/trunc_v_fss}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth]{images/trunc_v_sprt}
-\end{subfigure}
+\includegraphics[height=0.7\textheight]{images/c1_c2_ratios}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{How to choose $c_1$ and $c_2$}
+
+Another way is: $M$ can be set to a maximum allowable value and then $c_1$, $c_2$ are chosen to minimize $E_{\theta_0}[T]$, $E_{\theta_1}[T]$ or a weighted average of these three as per convenience.
+
+\begin{figure}
+\centering
+\includegraphics[height=0.7\textheight, width=0.6\textwidth]{IndustrialChoice.pdf}
 \end{figure}
 
 \end{frame}
