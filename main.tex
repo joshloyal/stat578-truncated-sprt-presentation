@@ -1,6 +1,7 @@
 \documentclass[10pt]{beamer}
 \usepackage{fontspec}
 \usepackage{caption}
+\usepackage{natbib}
 \usetheme{metropolis}
 \definecolor{uiucblue}{HTML}{13294B}
 \definecolor{steelblue}{HTML}{4682b4}
@@ -21,6 +22,8 @@
 \newcommand{\cmark}{\textcolor{orange}{\ding{51}}}
 \newcommand{\xmark}{\textcolor{gray}{\ding{55}}}%
 
+\renewcommand{\bibsection}{\subsubsection*{\bibname }}
+
 \title{The Truncated SPRT}
 
 \author{Anamitra Chaudhuri and Joshua Loyal}
@@ -28,6 +31,7 @@
            Paper: \\
            \textit{Asymptotic Efficiences of Truncated Sequential Tests} \\
            by Sawasd Tantaratana and Harold Vincent Poor}
+
 \date{\today}
 
 \begin{document}
@@ -45,7 +49,8 @@ Given $\theta_1 > \theta_0$, we want to design a sequential test $(T, D)$ for
 \[
 H_0: \theta \leq \theta_0 \quad \text{vs.} \quad H_1: \theta \geq \theta_1
 \]
-such that the error probabilities are controlled at levels $\alpha$ and $\beta$:
+such that the error probabilities are controlled at levels $\alpha$ and $\beta$
+\citet{tantara1977}:
 \[
 P_{\theta_0}(D = 1) \leq \alpha \quad \text{ and } \quad P_{\theta_1}(D = 0) \leq \beta.
 \]
@@ -101,6 +106,7 @@ Design a constant boundary truncated sequential test that combines the SPRT with
 \includegraphics[width=\textwidth]{images/truncated_sprt}
 \end{figure}
 
+\citet{tantara1977, tantara1982}
 \end{frame}
 
 \begin{frame}
@@ -317,6 +323,14 @@ Each ESS estimate was obtained with 5,000 Monte Carlo samples.
     \includegraphics[width=\textwidth]{images/ess_alpha1e4}
 \end{subfigure}
 \end{figure}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+
+\bibliographystyle{asa}
+\bibliography{reference}
+
 \end{frame}
 
 
