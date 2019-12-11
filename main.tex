@@ -23,6 +23,7 @@
 \newcommand{\xmark}{\textcolor{gray}{\ding{55}}}%
 
 \renewcommand{\bibsection}{\subsubsection*{\bibname }}
+%\renewcommand\refname{New References Header}
 
 \title{The Truncated SPRT}
 
@@ -49,8 +50,7 @@ Given $\theta_1 > \theta_0$, we want to design a sequential test $(T, D)$ for
 \[
 H_0: \theta \leq \theta_0 \quad \text{vs.} \quad H_1: \theta \geq \theta_1
 \]
-such that the error probabilities are controlled at levels $\alpha$ and $\beta$
-\citet{tantara1977}:
+such that the error probabilities are controlled at levels $\alpha$ and $\beta$:
 \[
 P_{\theta_0}(D = 1) \leq \alpha \quad \text{ and } \quad P_{\theta_1}(D = 0) \leq \beta.
 \]
@@ -138,7 +138,7 @@ D =
 \begin{itemize}
 \item How do we choose $A, B, M, \tau$ to achieve the desired error control?
 \item Does the ESS of the truncated SPRT fall below the equivalent FSS test ($M_{FSS}$) in the worst case scenario (at $\theta_{*}$)?
-\item How does this test compare with other bounded tests, e.g. Lorden's 2-SPRT, GLR?
+\item How does this test compare with other bounded tests, e.g. Lorden's 2-SPRT, GLR? What are the special advantages?
 \end{itemize}
 
 \end{frame}
@@ -227,9 +227,11 @@ when $\alpha = \beta$ and $c_1 = c_2$.
 \begin{frame}
 \frametitle{Trade-off}
 
-There is a trade-off between the truncation point $M$ and the expected sample size of the truncated test.
+There is a trade-off between the performance at the truncation point $M$ and the expected sample size of the truncated test.
 
-A lower truncation point allows more error to the FSS test but less error to the SPRT which makes the overall expected sample size higher.
+%A lower truncation point allows more error to the FSS test but less error to the SPRT which makes the overall expected sample size higher.
+
+As $c_1 = c_2$ goes from 0 to 1 there is at trade-off between the performance at $\theta_1$ (and $\theta_0$) and at $\theta_*$.
 
 \begin{figure}
 \centering
@@ -243,11 +245,11 @@ A lower truncation point allows more error to the FSS test but less error to the
 
 The trade-off can also be observed in the power function of the tests.
 
-Allowing more error to the FSS test and less error to the SPRT makes the truncated test less conservative.
+Allowing more error to the FSS test and less error to the SPRT makes the truncated test less conservative than SPRT but ESS gets higher.
 
 \begin{figure}
 \centering
-\includegraphics[height=0.6\textheight, width=0.6\textwidth]{trade-off.pdf}
+\includegraphics[height=0.7\textheight, width=0.6\textwidth]{images/PowerFunction.pdf}
 \end{figure}
 
 \end{frame}
@@ -268,7 +270,7 @@ One way to choose $c_1$ and $c_2$ is so that the following quantities are close 
 \frametitle{How to choose $c_1$ and $c_2$}
 \textit{Gaussian Example}: $X_1, X_2, \dots  \iidsim N(\theta, 1)$ and testing $H_0: \theta \leq -\delta$ vs. $H_1: \theta \geq \delta$.
 
-Assume we choose $\delta =1$, $\alpha = \beta$ and we consider the $-\delta$ and $\delta$ hypothesis as equally important. Then it makes sense to choose $c_1 = c_2 = c$.
+Assume we choose $\alpha = \beta$ and we consider the $-\delta$ and $\delta$ hypothesis as equally important. Then it makes sense to choose $c_1 = c_2 = c$.
 
 To investigate the effect of $c$ on $E_{\theta_{*}}[T\,] / M_{FSS}$, $M / M_{FSS}$, and $E_{\theta_1}[T\,] / E_{\theta_1}[T_{SPRT}]$, we performed Monte Carlo simulations with 2,000 iterations.
 
@@ -339,7 +341,23 @@ Each ESS estimate was obtained with 5,000 Monte Carlo samples.
 \end{figure}
 \end{frame}
 
-\begin{frame}[allowframebreaks]
+\begin{frame}
+\frametitle{Comparison with other Sequential Tests}
+For the example of curtailed sampling we compared the Truncated SPRT with other tests when $n=9$ and $c=1, 5$.
+
+\begin{figure}
+\centering
+\begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{images/Curtailed1.pdf}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{images/Curtailed2.pdf}
+\end{subfigure}
+\end{figure}
+
+\end{frame}
+\begin{frame}
 \frametitle{References}
 
 \bibliographystyle{asa}
